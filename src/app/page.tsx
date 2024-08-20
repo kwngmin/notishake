@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex min-h-dvh flex-col items-center justify-between w-full max-w-2xl mx-auto">
       <div>
         <div>hello</div>
         <div>welcome to notishake</div>

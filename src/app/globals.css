@@ -33,6 +33,6 @@ body {
     text-wrap: balance;
   }
   .input-base {
-    @apply h-12 ring-1 ring-neutral-300 focus:ring-2 focus:ring-indigo-500 border-none outline-none rounded px-3 disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed;
+    @apply h-11 ring-1 ring-neutral-300 focus:ring-2 focus:ring-indigo-500 border-none outline-none rounded px-3 disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed;
   }
 }
