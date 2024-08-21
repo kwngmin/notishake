@@ -21,9 +21,9 @@ model User {
   password  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  githubId   String?
-  kakaotalk_id  String?
-  google_id  String?
+  github_id   Int? @unique
+  kakaotalk_id  Int? @unique
+  google_id  Int? @unique
   naver_id  String?
   avatarUrl  String?
   tokens SMSToken[]
