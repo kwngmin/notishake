@@ -42,3 +42,9 @@ next-env.d.ts
 #prisma
 *.db
 *.db-journal
+
+# storybook
+.storybook/
+stories/
+*.stories.tsx
+*.stories.js
