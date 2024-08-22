@@ -43,8 +43,9 @@ next-env.d.ts
 *.db
 *.db-journal
 
-# storybook
+#storybook
 .storybook/
 stories/
 *.stories.tsx
 *.stories.js
+*storybook.log
