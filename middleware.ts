@@ -15,8 +15,12 @@ const publicPaths: Routes = {
 export async function middleware(request: NextRequest) {
   // get session.id to cookie
   const session = await getSession();
+  const pathName = request.nextUrl.pathname;
   // get pathName
-  const isPublicPath = publicPaths[request.nextUrl.pathname];
+  const isPublicPath =
+    publicPaths[pathName] ||
+    pathName.startsWith("/github") ||
+    pathName.startsWith("/sms");
   if (!session.id) {
     if (!isPublicPath) {
       return NextResponse.redirect(new URL("/", request.url));

@@ -38,14 +38,12 @@ next-env.d.ts
 
 #storybook
 *storybook.log
-
-#prisma
-*.db
-*.db-journal
-
-#storybook
 .storybook/
 stories/
 *.stories.tsx
 *.stories.js
 *storybook.log
+
+#prisma
+*.db
+*.db-journal
