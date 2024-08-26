@@ -4,8 +4,8 @@ import Link from "next/link";
 const snsList = [
   { name: "sms", path: "/sms", icon: "sms" },
   { name: "google", path: "/", icon: "google" },
-  { name: "naver", path: "/", icon: "naver" },
-  { name: "kakaotalk", path: "/", icon: "kakaotalk" },
+  { name: "naver", path: "/naver/login", icon: "naver" },
+  { name: "kakaotalk", path: "/kakao/login", icon: "kakaotalk" },
 ];
 
 const LoginPage = () => {

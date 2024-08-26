@@ -24,7 +24,7 @@ model User {
   github_id   Int? @unique
   kakaotalk_id  Int? @unique
   google_id  Int? @unique
-  naver_id  String?
+  naver_id  String? @unique
   avatarUrl  String?
   tokens SMSToken[]
 }

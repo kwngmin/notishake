@@ -20,6 +20,8 @@ export async function middleware(request: NextRequest) {
   const isPublicPath =
     publicPaths[pathName] ||
     pathName.startsWith("/github") ||
+    pathName.startsWith("/naver") ||
+    pathName.startsWith("/kakao") ||
     pathName.startsWith("/sms");
   if (!session.id) {
     if (!isPublicPath) {
