@@ -22,7 +22,8 @@ export async function middleware(request: NextRequest) {
     pathName.startsWith("/github") ||
     pathName.startsWith("/naver") ||
     pathName.startsWith("/kakao") ||
-    pathName.startsWith("/sms");
+    pathName.startsWith("/sms") ||
+    pathName.startsWith("/google");
   if (!session.id) {
     if (!isPublicPath) {
       return NextResponse.redirect(new URL("/", request.url));

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const snsList = [
   { name: "sms", path: "/sms", icon: "sms" },
-  { name: "google", path: "/", icon: "google" },
+  { name: "google", path: "/google/login", icon: "google" },
   { name: "naver", path: "/naver/login", icon: "naver" },
   { name: "kakaotalk", path: "/kakao/login", icon: "kakaotalk" },
 ];

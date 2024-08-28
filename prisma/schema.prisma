@@ -23,7 +23,7 @@ model User {
   updatedAt DateTime @updatedAt
   github_id   Int? @unique
   kakao_id  BigInt? @unique
-  google_id  Int? @unique
+  google_id  String? @unique
   naver_id  String? @unique
   avatarUrl  String?
   tokens SMSToken[]
