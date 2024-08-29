@@ -39,7 +39,7 @@ const SignUpForm = () => {
         errors={state?.fieldErrors.password_confirm}
         minLength={PASSWORD_MIN_LENGTH}
       />
-      <Button name="회원가입" />
+      <Button name="회원가입" type="submit" />
     </form>
   );
 };

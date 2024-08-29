@@ -1,5 +1,3 @@
-"use server";
-
 import db from "@/shared/config/database";
 import getSession from "@/shared/config/session";
 import { notFound, redirect } from "next/navigation";
@@ -7,22 +5,23 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const code = request.nextUrl.searchParams.get("code");
-  if (!code) {
+  const state = request.nextUrl.searchParams.get("state");
+  if (!code || !state) {
     return notFound();
   }
   const accessTokenParams = new URLSearchParams({
+    client_id: process.env.NAVER_CLIENT_ID!,
+    client_secret: process.env.NAVER_CLIENT_SECRET!,
+    redirect_uri: encodeURI(`${process.env.BASE_URL!}/login/callback/naver`),
     code,
-    client_id: process.env.GOOGLE_CLIENT_ID!,
-    client_secret: process.env.GOOGLE_CLIENT_SECRET!,
-    redirect_uri: `${process.env.BASE_URL!}/google/complete`,
-    grant_type: "authorization_code",
+    state,
   });
-  const accessTokenUrl = `https://oauth2.googleapis.com/token?${accessTokenParams.toString()}`;
-
+  const accessTokenUrl = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&${accessTokenParams.toString()}`;
   const res = await fetch(accessTokenUrl, {
-    method: "POST",
+    method: "GET",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "X-Naver-Client-Id": process.env.NAVER_CLIENT_ID!,
+      "X-Naver-Client-Secret": process.env.NAVER_CLIENT_SECRET!,
     },
   });
   const { error, access_token } = await res.json();
@@ -30,7 +29,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ message: "Error", status: 400 });
   }
   const userProfileResponse = await fetch(
-    "https://www.googleapis.com/oauth2/v3/userinfo",
+    "https://openapi.naver.com/v1/nid/me",
     {
       method: "GET",
       headers: {
@@ -39,10 +38,13 @@ export async function GET(request: NextRequest) {
       cache: "no-cache",
     }
   );
-  const { sub, given_name, picture, email } = await userProfileResponse.json();
+
+  const {
+    response: { id, name, mobile, profile_image, email },
+  } = await userProfileResponse.json();
   const user = await db.user.findUnique({
     where: {
-      google_id: sub,
+      naver_id: id,
     },
     select: { id: true },
   });
@@ -52,12 +54,15 @@ export async function GET(request: NextRequest) {
     await session.save();
     redirect("/profile");
   }
+
+  const phone = mobile.split("-").join("");
   const newUser = await db.user.create({
     data: {
-      google_id: sub,
-      username: given_name,
-      avatarUrl: picture,
+      naver_id: id,
       email,
+      username: name,
+      phone,
+      avatarUrl: profile_image,
     },
     select: { id: true },
   });

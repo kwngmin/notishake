@@ -19,11 +19,8 @@ export async function middleware(request: NextRequest) {
   // get pathName
   const isPublicPath =
     publicPaths[pathName] ||
-    pathName.startsWith("/github") ||
-    pathName.startsWith("/naver") ||
-    pathName.startsWith("/kakao") ||
-    pathName.startsWith("/sms") ||
-    pathName.startsWith("/google");
+    pathName.startsWith("/login/oauth") ||
+    pathName.startsWith("/login/callback");
   if (!session.id) {
     if (!isPublicPath) {
       return NextResponse.redirect(new URL("/", request.url));

@@ -1,10 +1,9 @@
-import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
+"use server";
 import { redirect } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
-export function GET(request: NextRequest) {
+export async function GET(request: NextRequest) {
   const baseUrl = "https://github.com/login/oauth/authorize";
-  //   const redirectUri = `${process.env.BASE_URL!}/github/complete`;
   const params = {
     client_id: process.env.GITHUB_CLIENT_ID!,
     scope: "read:user,user:email",

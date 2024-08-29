@@ -1,13 +1,12 @@
 import SignUpForm from "@/features/signup/ui/SignUpForm";
-import Button from "@/shared/ui/Button";
-import Input from "@/shared/ui/Input";
 import Link from "next/link";
 
 const snsList = [
-  { name: "sms", path: "/sms", icon: "sms" },
-  { name: "google", path: "/google/login", icon: "google" },
-  { name: "naver", path: "/naver/login", icon: "naver" },
-  { name: "kakaotalk", path: "/kakao/login", icon: "kakaotalk" },
+  // { name: "sms", path: "/sms", icon: "sms" },
+  { name: "github", path: "/login/oauth/github", icon: "github" },
+  { name: "google", path: "/login/oauth/google", icon: "google" },
+  { name: "naver", path: "/login/oauth/naver", icon: "naver" },
+  { name: "kakaotalk", path: "/login/oauth/kakao", icon: "kakaotalk" },
 ];
 
 const SignUpPage = () => {

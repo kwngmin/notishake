@@ -1,3 +1,5 @@
+"use server";
+
 import db from "@/shared/config/database";
 import getSession from "@/shared/config/session";
 import { notFound, redirect } from "next/navigation";
@@ -5,46 +7,46 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const code = request.nextUrl.searchParams.get("code");
-  const state = request.nextUrl.searchParams.get("state");
-  if (!code || !state) {
+  if (!code) {
     return notFound();
   }
+
   const accessTokenParams = new URLSearchParams({
-    client_id: process.env.NAVER_CLIENT_ID!,
-    client_secret: process.env.NAVER_CLIENT_SECRET!,
-    redirect_uri: encodeURI(`${process.env.BASE_URL!}/naver/complete`),
+    client_id: process.env.KAKAO_CLIENT_ID!,
+    redirect_uri: encodeURI(`${process.env.BASE_URL!}/login/callback/kakao`),
     code,
-    state,
+    client_secret: process.env.KAKAO_CLIENT_SECRET!,
   });
-  const accessTokenUrl = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&${accessTokenParams.toString()}`;
+  const accessTokenUrl = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&${accessTokenParams.toString()}`;
+
   const res = await fetch(accessTokenUrl, {
-    method: "GET",
+    method: "POST",
     headers: {
-      "X-Naver-Client-Id": process.env.NAVER_CLIENT_ID!,
-      "X-Naver-Client-Secret": process.env.NAVER_CLIENT_SECRET!,
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
     },
   });
-  const { error, access_token } = await res.json();
+  const { error, access_token, refresh_token } = await res.json();
   if (error) {
     return NextResponse.json({ message: "Error", status: 400 });
   }
-  const userProfileResponse = await fetch(
-    "https://openapi.naver.com/v1/nid/me",
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-      cache: "no-cache",
-    }
-  );
+  const userProfileResponse = await fetch("https://kapi.kakao.com/v2/user/me", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+      "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+    },
+    cache: "no-cache",
+  });
 
+  const response = await userProfileResponse.json();
   const {
-    response: { id, name, mobile, profile_image, email },
-  } = await userProfileResponse.json();
+    id,
+    properties: { nickname, profile_image },
+  } = response;
+  console.log(response, "kakao");
   const user = await db.user.findUnique({
     where: {
-      naver_id: id,
+      kakao_id: id,
     },
     select: { id: true },
   });
@@ -55,13 +57,10 @@ export async function GET(request: NextRequest) {
     redirect("/profile");
   }
 
-  const phone = mobile.split("-").join("");
   const newUser = await db.user.create({
     data: {
-      naver_id: id,
-      email,
-      username: name,
-      phone,
+      kakao_id: id,
+      username: nickname,
       avatarUrl: profile_image,
     },
     select: { id: true },

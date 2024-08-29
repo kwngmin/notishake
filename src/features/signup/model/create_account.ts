@@ -10,19 +10,6 @@ import bcrypt from "bcrypt";
 import db from "@/shared/config/database";
 import getSession from "@/shared/config/session";
 
-const checkUsername = async (username: string) => {
-  const user = await db.user.findUnique({
-    where: {
-      username,
-    },
-    select: {
-      id: true,
-    },
-  });
-
-  return Boolean(!user);
-};
-
 const checkEmail = async (email: string) => {
   const user = await db.user.findUnique({
     where: {
@@ -44,10 +31,7 @@ const formSchema = z.object({
     })
     .toLowerCase()
     .trim()
-    .min(USERNAME_MIN_LENGTH)
-    .refine(checkUsername, {
-      message: "Username already exists",
-    }),
+    .min(USERNAME_MIN_LENGTH),
   email: z.string().email().toLowerCase().trim().refine(checkEmail, {
     message: "Email already exists",
   }),

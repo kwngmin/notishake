@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { NextUIProvider } from "@nextui-org/react";
+import localFont from "next/font/local";
 import "@/app/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const pretendard = localFont({
+  src: "../../../../public/fonts/PretendardVariable.woff2",
+  display: "swap",
+  weight: "45 920",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-neutral-50 ${inter.className}`}>
+      <body className={`bg-neutral-50 ${pretendard.className}`}>
         <NextUIProvider>{children}</NextUIProvider>
       </body>
     </html>

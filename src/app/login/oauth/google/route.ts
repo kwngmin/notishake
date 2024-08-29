@@ -1,12 +1,12 @@
 "use server";
-import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 import { redirect } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
+import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   const baseUrl = "https://accounts.google.com/o/oauth2/v2/auth";
-  const redirect_uri = encodeURI(`${process.env.BASE_URL!}/google/complete`);
+  const redirect_uri = encodeURI(
+    `${process.env.BASE_URL!}/login/callback/google`
+  );
   const params = {
     scope: "https://www.googleapis.com/auth/drive.metadata.readonly",
     access_type: "offline",

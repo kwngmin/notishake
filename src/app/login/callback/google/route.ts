@@ -10,45 +10,39 @@ export async function GET(request: NextRequest) {
   if (!code) {
     return notFound();
   }
-
-  //   const accessTokenUrl = "https://kauth.kakao.com/oauth/token";
-
   const accessTokenParams = new URLSearchParams({
-    client_id: process.env.KAKAO_CLIENT_ID!,
-    redirect_uri: encodeURI(`${process.env.BASE_URL!}/kakao/complete`),
     code,
-    client_secret: process.env.KAKAO_CLIENT_SECRET!,
+    client_id: process.env.GOOGLE_CLIENT_ID!,
+    client_secret: process.env.GOOGLE_CLIENT_SECRET!,
+    redirect_uri: `${process.env.BASE_URL!}/login/callback/google`,
+    grant_type: "authorization_code",
   });
-  const accessTokenUrl = `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&${accessTokenParams.toString()}`;
+  const accessTokenUrl = `https://oauth2.googleapis.com/token?${accessTokenParams.toString()}`;
 
   const res = await fetch(accessTokenUrl, {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   });
-  const { error, access_token, refresh_token } = await res.json();
+  const { error, access_token } = await res.json();
   if (error) {
     return NextResponse.json({ message: "Error", status: 400 });
   }
-  const userProfileResponse = await fetch("https://kapi.kakao.com/v2/user/me", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-      "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-    },
-    cache: "no-cache",
-  });
-
-  const response = await userProfileResponse.json();
-  const {
-    id,
-    properties: { nickname, profile_image },
-  } = response;
-  console.log(response, "kakao");
+  const userProfileResponse = await fetch(
+    "https://www.googleapis.com/oauth2/v3/userinfo",
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      cache: "no-cache",
+    }
+  );
+  const { sub, given_name, picture, email } = await userProfileResponse.json();
   const user = await db.user.findUnique({
     where: {
-      kakao_id: id,
+      google_id: sub,
     },
     select: { id: true },
   });
@@ -58,12 +52,12 @@ export async function GET(request: NextRequest) {
     await session.save();
     redirect("/profile");
   }
-
   const newUser = await db.user.create({
     data: {
-      kakao_id: id,
-      username: nickname,
-      avatarUrl: profile_image,
+      google_id: sub,
+      username: given_name,
+      avatarUrl: picture,
+      email,
     },
     select: { id: true },
   });
