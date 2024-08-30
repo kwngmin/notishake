@@ -27,6 +27,8 @@ model User {
   naver_id  String? @unique
   avatarUrl  String?
   tokens SMSToken[]
+  posts Post[]
+  comments Comment[]
 }
 
 model SMSToken {
@@ -36,4 +38,27 @@ model SMSToken {
   updatedAt DateTime @updatedAt
   userId Int
   user User @relation(fields: [userId], references: [id])
+}
+
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  comments Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
 }

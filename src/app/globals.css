@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "@material-design-icons/font";
+@import "material-symbols";
 
 /* pretendard font 적용 */
 @font-face {
@@ -10,6 +10,10 @@
   font-style: normal;
   font-display: swap;
   src: url("/public/fonts/PretendardVariable.woff2") format("woff2-variations");
+}
+
+.material-fill {
+  font-variation-settings: "FILL" 1;
 }
 
 /* 
@@ -43,5 +47,19 @@ body {
   }
   .input-base {
     @apply h-11 ring-1 ring-neutral-300 focus:ring-2 focus:ring-indigo-500 border-none outline-none rounded px-3 disabled:bg-neutral-100 disabled:text-neutral-400 disabled:cursor-not-allowed;
+  }
+  .scale-115 {
+    --tw-scale-x: 1.15;
+    --tw-scale-y: 1.15;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+      rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+      scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+  .scale-120 {
+    --tw-scale-x: 1.2;
+    --tw-scale-y: 1.2;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+      rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+      scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 }
