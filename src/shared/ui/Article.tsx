@@ -21,7 +21,8 @@ export default function Article({ note }: Props) {
   const {
     id,
     title,
-    content,
+    things,
+    username,
     createdAt,
     updatedAt,
     userId,
@@ -45,9 +46,9 @@ export default function Article({ note }: Props) {
         // onClick={handleClick}
         className="leading-snug font-semibold text-black/80 grow break-keep text-lg mb-0.5"
       >
-        {title}
+        {username ?? "이름 없는 친구"}
       </h2>
-      <p className="text-neutral-600 break-keep">{content}</p>
+      <p className="text-neutral-600 break-keep">{things}</p>
       {/* <div className="flex justify-between items-center py-0.5">
         <time className="text-black/60 text-sm flex items-center">
           <span className="mr-1">

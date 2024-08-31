@@ -1,3 +1,6 @@
+import WriteModal from "@/features/write/ui/WriteModal";
+import { useDisclosure } from "@nextui-org/react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const menuList = [
@@ -35,7 +38,8 @@ const menuList = [
 
 const SideNavBar = ({ sideNavWidth }: { sideNavWidth: number }) => {
   const path = usePathname();
-  console.log(path);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
     <div
       className="hidden lg:flex justify-end shrink-0"
@@ -46,39 +50,63 @@ const SideNavBar = ({ sideNavWidth }: { sideNavWidth: number }) => {
           notishake
         </div>
         <div className="p-2 flex flex-col gap-2">
-          {menuList.map((menu) => (
-            <div
-              key={menu.title}
-              className="flex items-center gap-1 rounded group hover:bg-indigo-50 *:transition-all  cursor-pointer"
-            >
-              {menu.title !== "profile" ? (
-                <div className="size-12 flex items-center justify-center">
-                  <span
-                    className={`material-symbols-rounded flex size-10 items-center justify-center text-3xl font-light group-hover:font-normal transition-all ${
-                      path === menu.path ? "material-fill text-indigo-700" : ""
-                    } ${
-                      menu.title === "home"
-                        ? "scale-110 group-hover:scale-115"
-                        : menu.title === "favorite"
-                        ? "scale-105 group-hover:scale-110"
-                        : "scale-100 group-hover:scale-105"
-                    }`}
-                  >
-                    {menu.icon}
+          {menuList.map((menu) => {
+            if (menu.title === "write") {
+              return (
+                <button
+                  key={menu.title}
+                  onClick={onOpen}
+                  className="flex items-center gap-1 rounded group hover:bg-indigo-50 *:transition-all  cursor-pointer"
+                >
+                  <div className="size-12 flex items-center justify-center">
+                    <span className="material-symbols-rounded flex size-10 items-center justify-center text-3xl font-light group-hover:font-normal transition-all scale-100 group-hover:scale-105">
+                      {menu.icon}
+                    </span>
+                  </div>
+                  <span className="text-md font-medium group-hover:text-lg group-hover:font-semibold">
+                    {menu.name}
                   </span>
-                </div>
-              ) : (
-                <div className="size-12 flex items-center justify-center">
-                  <span className="size-7 bg-slate-200 rounded-full" />
-                </div>
-              )}
-              <span className="text-md font-medium group-hover:text-lg group-hover:font-semibold">
-                {menu.name}
-              </span>
-            </div>
-          ))}
+                </button>
+              );
+            }
+            return (
+              <Link
+                key={menu.title}
+                href={menu.path}
+                className="flex items-center gap-1 rounded group hover:bg-indigo-50 *:transition-all  cursor-pointer"
+              >
+                {menu.title !== "profile" ? (
+                  <div className="size-12 flex items-center justify-center">
+                    <span
+                      className={`material-symbols-rounded flex size-10 items-center justify-center text-3xl font-light group-hover:font-normal transition-all ${
+                        path === menu.path
+                          ? "material-fill text-indigo-700"
+                          : ""
+                      } ${
+                        menu.title === "home"
+                          ? "scale-110 group-hover:scale-115"
+                          : menu.title === "favorite"
+                          ? "scale-105 group-hover:scale-110"
+                          : "scale-100 group-hover:scale-105"
+                      }`}
+                    >
+                      {menu.icon}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="size-12 flex items-center justify-center">
+                    <span className="size-7 bg-slate-200 rounded-full" />
+                  </div>
+                )}
+                <span className="text-md font-medium group-hover:text-lg group-hover:font-semibold">
+                  {menu.name}
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </div>
+      <WriteModal isOpen={isOpen} onOpenChange={onOpenChange} />
     </div>
   );
 };

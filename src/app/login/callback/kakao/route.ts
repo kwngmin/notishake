@@ -54,13 +54,13 @@ export async function GET(request: NextRequest) {
     const session = await getSession();
     session.id = user.id;
     await session.save();
-    redirect("/profile");
+    redirect("/main");
   }
 
   const newUser = await db.user.create({
     data: {
       kakao_id: id,
-      username: nickname,
+      // username: nickname,
       avatarUrl: profile_image,
     },
     select: { id: true },
@@ -68,5 +68,5 @@ export async function GET(request: NextRequest) {
   const session = await getSession();
   session.id = newUser.id;
   await session.save();
-  return redirect("/profile");
+  return redirect("/main");
 }

@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement())
-  username  String  
+  username  String?  @unique
   email     String?   @unique
   phone     String?   @unique
   password  String?
@@ -43,8 +43,7 @@ model SMSToken {
 
 model Post {
   id        Int      @id @default(autoincrement())
-  title     String
-  content   String
+  things      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId Int
@@ -54,7 +53,7 @@ model Post {
 
 model Comment {
   id        Int      @id @default(autoincrement())
-  content   String
+  comment   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId Int

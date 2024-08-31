@@ -15,6 +15,24 @@
 .material-fill {
   font-variation-settings: "FILL" 1;
 }
+.no-highlight {
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  outline-offset: -9999px !important; /* 화면에서 보이지 않도록 오프셋 설정 */
+}
+
+input,
+input:focus,
+input:focus-visible,
+textarea,
+textarea:focus,
+textarea:focus-visible {
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  outline-offset: -9999px !important; /* 화면에서 보이지 않도록 오프셋 설정 */
+  /* outline: none !important;
+  box-shadow: none !important;  */
+}
 
 /* 
 :root {

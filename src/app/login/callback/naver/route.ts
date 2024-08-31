@@ -52,16 +52,16 @@ export async function GET(request: NextRequest) {
     const session = await getSession();
     session.id = user.id;
     await session.save();
-    redirect("/profile");
+    redirect("/main");
   }
 
   const phone = mobile.split("-").join("");
   const newUser = await db.user.create({
     data: {
       naver_id: id,
-      email,
-      username: name,
-      phone,
+      // email,
+      // username: name,
+      // phone,
       avatarUrl: profile_image,
     },
     select: { id: true },
@@ -69,5 +69,5 @@ export async function GET(request: NextRequest) {
   const session = await getSession();
   session.id = newUser.id;
   await session.save();
-  return redirect("/profile");
+  return redirect("/main");
 }

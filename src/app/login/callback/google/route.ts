@@ -50,19 +50,19 @@ export async function GET(request: NextRequest) {
     const session = await getSession();
     session.id = user.id;
     await session.save();
-    redirect("/profile");
+    redirect("/main");
   }
   const newUser = await db.user.create({
     data: {
       google_id: sub,
-      username: given_name,
+      // username: given_name,
       avatarUrl: picture,
-      email,
+      // email,
     },
     select: { id: true },
   });
   const session = await getSession();
   session.id = newUser.id;
   await session.save();
-  return redirect("/profile");
+  return redirect("/main");
 }
