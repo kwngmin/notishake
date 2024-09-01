@@ -20,9 +20,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   if (sideNavWidth === 0) return null;
 
   return (
-    <div className="min-h-dvh w-full overflow-hidden flex">
+    <div className="h-dvh max-h-dvh w-full overflow-hidden flex">
       <SideNavBar sideNavWidth={sideNavWidth} />
-      <div className="w-full flex">
+      <div className="w-full flex overflow-y-auto">
         <main className="w-full max-w-screen-md mx-auto lg:mx-0 px-10">
           {children}
         </main>

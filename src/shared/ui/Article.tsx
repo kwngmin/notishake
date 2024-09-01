@@ -44,7 +44,7 @@ export default function Article({ note }: Props) {
     <article className="py-8 border-t border-gray-300">
       <h2
         // onClick={handleClick}
-        className="leading-snug font-semibold text-black/80 grow break-keep text-lg mb-0.5"
+        className="leading-snug font-semibold text-black/80 grow break-keep mb-0.5"
       >
         {username ?? "이름 없는 친구"}
       </h2>

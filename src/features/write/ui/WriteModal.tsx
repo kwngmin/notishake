@@ -9,6 +9,13 @@ import {
 } from "@nextui-org/react";
 import { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
+import { postThings } from "../model/post_things";
+import { redirect } from "next/navigation";
+
+const initialState = {
+  success: false,
+  error: false,
+};
 
 const WriteModal = ({
   isOpen,
@@ -19,6 +26,13 @@ const WriteModal = ({
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   //   const [state, dispatch] = useFormState(postThings, null);
+  const [state, dispatch] = useFormState(postThings, initialState);
+
+  if (state.success) {
+    console.log(state);
+    onOpenChange();
+    redirect("/main");
+  }
 
   useEffect(() => {
     if (isOpen) {
@@ -45,7 +59,7 @@ const WriteModal = ({
       }}
     >
       <ModalContent>
-        <form>
+        <form action={dispatch}>
           <ModalBody className="flex flex-col gap-0 p-0">
             {/* <Input
           name="title"
@@ -61,7 +75,7 @@ const WriteModal = ({
         /> */}
             <Textarea
               ref={textareaRef}
-              name="content"
+              name="things"
               size="lg"
               radius="none"
               fullWidth

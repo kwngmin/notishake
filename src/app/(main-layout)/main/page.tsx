@@ -9,7 +9,11 @@ const titleData = {
 };
 
 const MainPage = async () => {
-  const allPosts = await db.post.findMany();
+  const allPosts = await db.post.findMany({
+    orderBy: {
+      createdAt: "desc", // 최신순 정렬
+    },
+  });
   console.log(allPosts);
   return (
     <div>
