@@ -8,17 +8,18 @@ import { useEffect, useState } from "react";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const windowWidth = useGetWindowWidth();
-  const [sideNavWidth, setSideNavWidth] = useState(0);
+  const [sideNavWidth, setSideNavWidth] = useState<number | null>(null);
 
   useEffect(() => {
-    if (windowWidth > 1280) {
+    // if (windowWidth > 1280) {
+    if (typeof window !== "undefined") {
       setTimeout(() => {
         setSideNavWidth(calculateSidebarWidth(windowWidth));
       }, 0);
     }
   }, [windowWidth]);
 
-  if (sideNavWidth === 0) return null;
+  if (sideNavWidth === null) return null;
 
   return (
     <div className="h-dvh max-h-dvh w-full overflow-hidden flex">
