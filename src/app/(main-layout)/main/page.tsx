@@ -7,7 +7,9 @@ import { unstable_cache } from "next/cache";
 const titleData = {
   title: `Notes`,
   subtitle: "Feeds",
-  description: `Record of thought, moments, feelings that I don't want to forget.`,
+  // description: `Record of thought, moments, feelings that I don't want to forget.`,
+  // description: `Record of thought, moments, feelings...`,
+  description: `Shake your thoughts, feelings, and moments`,
 };
 
 const getPosts = async () => {

@@ -100,7 +100,7 @@ export default function Article({ note }: Props) {
         {sanitizedText(things)
           .split(/\r\n|\n/)
           .map((line: string, index: number) => (
-            <p key={index} className="leading-relaxed break-keep">
+            <p key={index} className="leading-loose break-keep lg:pr-9">
               {line}
               <br />
             </p>

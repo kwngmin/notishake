@@ -60,10 +60,14 @@ const SideNavBar = ({ sideNavWidth }: { sideNavWidth: number }) => {
       style={{ width: sideNavWidth }}
     >
       <div className=" shrink-0 w-64 h-dvh">
-        <div className="text-3xl font-bold tracking-tight text-indigo-500 h-16 flex items-center px-6">
+        <div className="flex flex-col justify-center gap-0 text-3xl font-bold tracking-tight text-indigo-500 h-16 px-6 mt-3">
           notishake
+          <span className="text-sm font-normal tracking-normal leading-none text-indigo-800">
+            {/* Thoughful moment */}
+            {/* Shake your thoughts */}
+          </span>
         </div>
-        <div className="p-2 flex flex-col gap-2">
+        <div className="py-2 px-3 flex flex-col gap-2">
           {menuList.map((menu) => {
             if (menu.title === "write") {
               return (
