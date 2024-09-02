@@ -59,7 +59,7 @@ const SideNavBar = ({ sideNavWidth }: { sideNavWidth: number }) => {
       className="hidden lg:flex justify-end shrink-0"
       style={{ width: sideNavWidth }}
     >
-      <div className=" shrink-0 w-64 h-dvh border-r border-slate-200">
+      <div className=" shrink-0 w-64 h-dvh">
         <div className="text-3xl font-bold tracking-tight text-indigo-500 h-16 flex items-center px-6">
           notishake
         </div>

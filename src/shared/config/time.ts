@@ -1,0 +1,12 @@
+export const ONE_SECOND = 1;
+export const TEN_SECONDS = ONE_SECOND * 10;
+export const THIRTY_SECONDS = ONE_SECOND * 30;
+export const ONE_MINUTE = ONE_SECOND * 60;
+export const TEN_MINUTES = ONE_MINUTE * 10;
+export const THIRTY_MINUTES = ONE_MINUTE * 30;
+export const ONE_HOUR = ONE_MINUTE * 60;
+export const THREE_HOURS = ONE_HOUR * 3;
+export const SIX_HOURS = ONE_HOUR * 6;
+export const TWELVE_HOURS = ONE_HOUR * 12;
+export const ONE_DAY = ONE_HOUR * 24;
+export const ONE_WEEK = ONE_DAY * 7;

@@ -2,6 +2,7 @@
 
 import { useGetWindowWidth } from "@/shared/hooks/useGetWidth";
 import { calculateSidebarWidth } from "@/shared/utils/layout";
+import DockBar from "@/widgets/dock-bar/ui/DockBar";
 import SideNavBar from "@/widgets/side-nav-bar/ui/SideNavBar";
 import { useEffect, useState } from "react";
 
@@ -23,12 +24,10 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="h-dvh max-h-dvh w-full overflow-hidden flex">
       <SideNavBar sideNavWidth={sideNavWidth} />
       <div className="w-full flex overflow-y-auto">
-        <main className="w-full max-w-screen-md mx-auto lg:mx-0 px-10">
+        <main className="w-full max-w-screen-md mx-auto lg:mx-0 px-4 sm:px-6 md:px-10">
           {children}
         </main>
-        <div className="lg:hidden fixed bottom-0 left-1/2 -translate-x-1/2 w-full md:w-96 h-16 bg-slate-200">
-          dock
-        </div>
+        <DockBar />
       </div>
     </div>
   );

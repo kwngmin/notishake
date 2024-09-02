@@ -11,6 +11,7 @@ import { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
 import { postThings } from "../model/post_things";
 import { redirect } from "next/navigation";
+import { THIRTY_SECONDS } from "@/shared/config/time";
 
 const initialState = {
   success: false,
@@ -25,7 +26,6 @@ const WriteModal = ({
   onOpenChange: () => void;
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  //   const [state, dispatch] = useFormState(postThings, null);
   const [state, dispatch] = useFormState(postThings, initialState);
 
   if (state.success) {
@@ -40,7 +40,7 @@ const WriteModal = ({
         if (textareaRef.current) {
           textareaRef.current.focus();
         }
-      }, 30);
+      }, THIRTY_SECONDS);
 
       return () => clearTimeout(timer);
     }

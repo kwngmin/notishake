@@ -2,7 +2,7 @@
 
 import db from "@/shared/config/database";
 import getSession from "@/shared/config/session";
-import { redirect } from "next/navigation";
+import { revalidateTag } from "next/cache";
 
 export async function postThings(prevState: any, formData: FormData) {
   const things = formData.get("things");
@@ -22,7 +22,10 @@ export async function postThings(prevState: any, formData: FormData) {
     },
   });
 
+  console.log(post, "data");
+
   if (post) {
+    revalidateTag("posts");
     return { success: true };
   }
   return { success: false };

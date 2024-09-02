@@ -12,10 +12,23 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Dot from "./Dot";
 import { getDate } from "../utils/date";
+import moment from "moment";
+import "moment/locale/ko";
 
 type Props = {
   note: any;
 };
+
+const buttons = [
+  {
+    icon: "move_to_inbox",
+    text: "구독",
+  },
+  {
+    icon: "block",
+    text: "차단",
+  },
+];
 
 export default function Article({ note }: Props) {
   const {
@@ -39,29 +52,70 @@ export default function Article({ note }: Props) {
   //   const handleClick = () => {
   //     router.push(`/notes/${id}`);
   //   };
-  console.log(note);
-  return (
-    <article className="py-8 border-t border-gray-300">
-      <h2
-        // onClick={handleClick}
-        className="leading-snug font-semibold text-black/80 grow break-keep mb-0.5"
-      >
-        {username ?? "이름 없는 친구"}
-      </h2>
-      <p className="text-neutral-600 break-keep">{things}</p>
-      {/* <div className="flex justify-between items-center py-0.5">
-        <time className="text-black/60 text-sm flex items-center">
-          <span className="mr-1">
-            {createdAt == updatedAt ? "작성일 :" : "최근 수정일 :"}
-          </span>
-          {getDate(createdAt.toLocaleString())}
-          <Dot />
-        </time>
-      </div> */}
+  moment().format("ko");
 
-      <div className="flex justify-between items-center my-3">
+  // 연속된 줄바꿈을 하나로 치환
+  const sanitizedText = (text: string) => {
+    return text.replace(/(\r\n|\n|\r){2,}/g, "\n");
+  };
+
+  return (
+    <article className="border-b last:border-none border-neutral-300 py-8">
+      <div className="flex items-center justify-between mb-2">
+        <h2 className="leading-snug font-semibold text-black/80 grow break-keep flex items-center gap-2">
+          {username ?? "이름 없는 친구"}
+          <div className="flex items-center gap-1 text-slate-400 text-sm select-none tracking-tight font-normal">
+            <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl font-medium">
+              edit
+            </span>
+            메모
+          </div>
+        </h2>
+        <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl">
+          more_horiz
+        </span>
+        {/* <div className="flex items-center gap-6 px-2">
+          <div className="flex items-center gap-3">
+            {buttons.map((button) => (
+              <button
+                key={button.icon}
+                className="h-8 flex items-center gap-1 font-medium rounded text-slate-400 text-sm select-none tracking-tight"
+              >
+                <span
+                  className={`material-symbols-rounded flex size-5 items-center justify-center  ${
+                    button.icon === "move_to_inbox"
+                      ? "text-xl"
+                      : "text-lg scale-95"
+                  }`}
+                >
+                  {button.icon}
+                </span>
+                {button.text}
+              </button>
+            ))}
+          </div>
+        </div> */}
+      </div>
+      <div>
+        {sanitizedText(things)
+          .split(/\r\n|\n/)
+          .map((line: string, index: number) => (
+            <p key={index} className="leading-relaxed break-keep">
+              {line}
+              <br />
+            </p>
+          ))}
+      </div>
+
+      <div className="flex justify-between items-center mt-3">
         <div className="flex items-center gap-4">
+          <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl scale-125 font-light">
+            bookmark
+          </span>
           <div className="flex items-center gap-1">
+            <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl">
+              favorite
+            </span>
             {/* <RoundIcon name="favorite" /> */}
             <span
               className="font-semibold text-black/70 text-sm" //
@@ -70,17 +124,29 @@ export default function Article({ note }: Props) {
               {/* {likes} */}
             </span>
           </div>
-          <span className="bg-slate-100 active:bg-slate-200 px-2 h-7 flex items-center font-medium rounded text-slate-600 text-xs select-none cursor-pointer">
-            구독하기
-          </span>
-          <span className="bg-slate-100 active:bg-slate-200 px-2 h-7 flex items-center font-medium rounded text-slate-600 text-xs select-none cursor-pointer">
-            차단하기
-          </span>
+          <div className="flex items-center gap-1">
+            <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl text-black/70">
+              subdirectory_arrow_right
+            </span>
+            <span className=" text-black/70 text-sm">
+              댓글
+              <span className="font-semibold ml-1">12</span>개 더보기
+            </span>
+          </div>
+          {/* <div className="flex items-center gap-1">
+            <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl text-black/70">
+              chat_bubble
+            </span>
+            <span className="font-semibold text-black/70 text-sm">12</span>
+          </div> */}
         </div>
-        <div className="flex items-center gap-6 px-2">
-          {/* <RoundIcon name="bookmark" /> */}
-        </div>
+        <time className="text-neutral-400 text-sm flex items-center tracking-tight font-normal">
+          {moment(createdAt).locale("ko").fromNow()}
+          <Dot />
+          {moment(createdAt).format("L")}
+        </time>
       </div>
+
       {/* <div className="flex flex-col gap-1">
         {comment !== null && (
           <div className="flex gap-2">
