@@ -6,5 +6,7 @@
 // max-w-screen-md 768
 // max-w-screen-sm 640
 export const calculateSidebarWidth = (windowWidth: number): number => {
-  return windowWidth && windowWidth > 1024 ? (windowWidth - 1024) / 2 + 256 : 0;
+  return windowWidth && windowWidth >= 1024
+    ? (windowWidth - 1024) / 2 + 256
+    : 0;
 };

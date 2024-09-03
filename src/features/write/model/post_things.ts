@@ -22,10 +22,8 @@ export async function postThings(prevState: any, formData: FormData) {
     },
   });
 
-  console.log(post, "data");
-
   if (post) {
-    revalidateTag("posts");
+    revalidateTag("notes");
     return { success: true };
   }
   return { success: false };

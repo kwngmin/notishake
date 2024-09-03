@@ -30,7 +30,7 @@ const buttons = [
   },
 ];
 
-export default function Article({ note }: Props) {
+export default function Note({ note }: Props) {
   const {
     id,
     title,
@@ -109,11 +109,11 @@ export default function Article({ note }: Props) {
 
       <div className="flex justify-between items-center mt-3">
         <div className="flex items-center gap-4">
-          <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl scale-125 font-light">
+          <span className="material-symbols-outlined flex size-5 items-center justify-center text-xl scale-125 font-light">
             bookmark
           </span>
           <div className="flex items-center gap-1">
-            <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl">
+            <span className="material-symbols-outlined flex size-5 items-center justify-center text-xl">
               favorite
             </span>
             {/* <RoundIcon name="favorite" /> */}
@@ -130,7 +130,7 @@ export default function Article({ note }: Props) {
             </span>
             <span className=" text-black/70 text-sm">
               댓글
-              <span className="font-semibold ml-1">12</span>개 더보기
+              <span className="font-semibold ml-1">12</span>개 보기
             </span>
           </div>
           {/* <div className="flex items-center gap-1">
