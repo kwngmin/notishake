@@ -100,7 +100,7 @@ export default function Note({ note }: Props) {
         {sanitizedText(things)
           .split(/\r\n|\n/)
           .map((line: string, index: number) => (
-            <p key={index} className="leading-loose break-keep lg:pr-9">
+            <p key={index} className="leading-relaxed break-keep lg:pr-9">
               {line}
               <br />
             </p>
@@ -109,11 +109,11 @@ export default function Note({ note }: Props) {
 
       <div className="flex justify-between items-center mt-3">
         <div className="flex items-center gap-4">
-          <span className="material-symbols-outlined flex size-5 items-center justify-center text-xl scale-125 font-light">
+          {/* <span className="material-symbols-outlined flex size-5 items-center justify-center text-xl scale-125 font-light">
             bookmark
-          </span>
+          </span> */}
           <div className="flex items-center gap-1">
-            <span className="material-symbols-outlined flex size-5 items-center justify-center text-xl">
+            <span className="material-symbols-outlined material-fill flex size-5 items-center justify-center text-xl text-neutral-300">
               favorite
             </span>
             {/* <RoundIcon name="favorite" /> */}
@@ -125,12 +125,12 @@ export default function Note({ note }: Props) {
             </span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl text-black/70">
+            {/* <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl text-black/70">
               subdirectory_arrow_right
-            </span>
-            <span className=" text-black/70 text-sm">
+            </span> */}
+            <span className=" text-black/70 text-sm text-neutral-500 border border-neutral-300 rounded-full px-3 py-0.5">
               댓글
-              <span className="font-semibold ml-1">12</span>개 보기
+              <span className="font-semibold ml-1">12</span>개
             </span>
           </div>
           {/* <div className="flex items-center gap-1">
