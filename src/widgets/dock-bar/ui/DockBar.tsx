@@ -38,7 +38,7 @@ const DockBar = () => {
   const path = usePathname();
 
   return (
-    <div className="fixed lg:hidden bottom-0 sm:bottom-6 left-1/2 -translate-x-1/2 w-full sm:max-w-lg sm:rounded-full overflow-hidden h-16 bg-white/30 backdrop-blur-md border-t border-neutral-200 sm:border-none sm:outline sm:outline-1 sm:outline-neutral-200 lg:outline-none grid grid-cols-5">
+    <div className="fixed lg:hidden bottom-0 sm:bottom-7 left-1/2 -translate-x-1/2 w-full sm:max-w-lg sm:px-4  sm:rounded-full overflow-hidden h-16 bg-white/30 backdrop-blur-md border-t border-neutral-200 sm:border-none sm:outline sm:outline-1 sm:outline-neutral-200 lg:outline-none grid grid-cols-5">
       {menuList.map((menu) => {
         if (menu.title === "write") {
           return (
@@ -48,11 +48,11 @@ const DockBar = () => {
               className="flex flex-col items-center rounded"
             >
               <div className="size-10 flex items-center justify-center">
-                <span className="mt-1 material-symbols-rounded flex size-8 items-center justify-center text-2xl font-light">
+                <span className="mt-1 material-symbols-rounded flex size-8 items-center justify-center text-3xl font-light scale-95">
                   {menu.icon}
                 </span>
               </div>
-              <span className="text-xs font-medium">{menu.name}</span>
+              <span className="text-xs">{menu.name}</span>
             </button>
           );
         }
@@ -65,13 +65,13 @@ const DockBar = () => {
             {menu.title !== "profile" ? (
               <div className="size-10 flex items-center justify-center">
                 <span
-                  className={`mt-1 material-symbols-rounded flex size-8 items-center justify-center text-2xl font-light group-hover:font-normal transition-all ${
+                  className={`mt-1 material-symbols-rounded flex size-8 items-center justify-center text-3xl font-light group-hover:font-normal transition-all ${
                     path === menu.path ? "material-fill text-indigo-700" : ""
                   } ${
                     menu.title === "home"
                       ? "scale-110 group-hover:scale-115"
                       : menu.title === "favorite"
-                      ? "scale-105 group-hover:scale-110"
+                      ? "scale-100 group-hover:scale-110"
                       : "scale-100 group-hover:scale-105"
                   }`}
                 >
@@ -90,7 +90,7 @@ const DockBar = () => {
                 />
               </div>
             )}
-            <span className="text-xs font-medium">{menu.name}</span>
+            <span className="text-xs">{menu.name}</span>
           </Link>
         );
       })}
