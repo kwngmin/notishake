@@ -48,7 +48,7 @@ const NoteList = ({ notes }: NoteListProps) => {
   }, [page]);
 
   return (
-    <div className="flex flex-col pb-10">
+    <div className="flex flex-col pb-16">
       {allNotes.map((note) => (
         <Note key={note.id} note={note} />
       ))}
