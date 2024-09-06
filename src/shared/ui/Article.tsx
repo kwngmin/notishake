@@ -60,9 +60,9 @@ export default function Note({ note }: Props) {
   };
 
   return (
-    <article className="border-b last:border-none border-neutral-200 py-7">
+    <article className="border-b last:border-none border-neutral-200 py-6">
       <div className="flex items-center justify-between mb-2">
-        <h2 className="leading-snug font-semibold text-black/80 grow break-keep flex items-center gap-2">
+        <h2 className="leading-snug font-semibold text-black/80 grow break-keep flex items-center gap-2 text-sm">
           {username ?? "이름 없는 친구"}
           <div className="flex items-center gap-1 text-slate-400 text-sm select-none tracking-tight font-normal">
             <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl font-medium">

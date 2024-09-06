@@ -25,7 +25,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="h-dvh max-h-dvh w-full overflow-hidden flex">
       <SideNavBar sideNavWidth={sideNavWidth} />
       <div className="w-full flex overflow-y-auto">
-        <main className="w-full max-w-screen-md mx-auto lg:mx-0 px-4 sm:px-6 md:px-10">
+        <main className="w-full max-w-screen-sm mx-auto lg:mx-0 px-4 sm:px-6 md:px-10">
           {children}
         </main>
         <DockBar />
