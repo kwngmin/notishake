@@ -34,7 +34,11 @@ const menuList = [
   },
 ];
 
-const DockBar = () => {
+const DockBar = ({
+  onWriteModalOpen,
+}: {
+  onWriteModalOpen: (isOpen: boolean) => void;
+}) => {
   const path = usePathname();
 
   return (
@@ -44,7 +48,7 @@ const DockBar = () => {
           return (
             <button
               key={menu.title}
-              //   onClick={onOpen}
+              onClick={() => onWriteModalOpen(true)}
               className="flex flex-col items-center rounded"
             >
               <div className="size-10 flex items-center justify-center">

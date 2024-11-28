@@ -17,11 +17,13 @@ export default function HomePage() {
         </Link>
         <div className="flex justify-between items-center">
           <span className="text-lg">이미 계정이 있으신가요?</span>
-          <Link href="/login">
-            <NextUILink size="lg" className="font-semibold text-indigo-500">
-              로그인
-            </NextUILink>
-          </Link>
+          <NextUILink
+            size="lg"
+            className="font-semibold text-indigo-500"
+            href="/login"
+          >
+            로그인
+          </NextUILink>
         </div>
       </div>
     </main>

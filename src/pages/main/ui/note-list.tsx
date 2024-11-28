@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Note from "@/shared/ui/Article";
 import { getNotes, InitialNoteList } from "../model/get-notes";
 
@@ -14,6 +14,13 @@ const NoteList = ({ notes }: NoteListProps) => {
   const [isLastPage, setIsLastPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const trigger = useRef<HTMLSpanElement>(null);
+
+  console.log(allNotes, "allNotes");
+
+  // // 서버에서 새 데이터를 강제로 가져오는 함수
+  // useEffect(() => {
+  //   setAllNotes((prev) => [...notes, ...prev]);
+  // }, [notes]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

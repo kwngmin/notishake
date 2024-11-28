@@ -1,10 +1,8 @@
 "use client";
-import { getUserAvatarUrl } from "@/entities/user/model/getUserAvatarUrl";
-import WriteModal from "@/features/write/ui/WriteModal";
-import { useDisclosure } from "@nextui-org/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { getUserAvatarUrl } from "@/entities/user/model/getUserAvatarUrl";
 
 const menuList = [
   {
@@ -39,9 +37,14 @@ const menuList = [
   },
 ];
 
-const SideNavBar = ({ sideNavWidth }: { sideNavWidth: number }) => {
+const SideNavBar = ({
+  sideNavWidth,
+  onWriteModalOpen,
+}: {
+  sideNavWidth: number;
+  onWriteModalOpen: (isOpen: boolean) => void;
+}) => {
   const path = usePathname();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -73,7 +76,8 @@ const SideNavBar = ({ sideNavWidth }: { sideNavWidth: number }) => {
               return (
                 <button
                   key={menu.title}
-                  onClick={onOpen}
+                  // onClick={onOpen}
+                  onClick={() => onWriteModalOpen(true)}
                   className="flex items-center gap-1 rounded group hover:bg-indigo-50 *:transition-all  cursor-pointer"
                 >
                   <div className="size-12 flex items-center justify-center">
@@ -81,7 +85,7 @@ const SideNavBar = ({ sideNavWidth }: { sideNavWidth: number }) => {
                       {menu.icon}
                     </span>
                   </div>
-                  <span className="text-md font-medium group-hover:text-lg group-hover:font-semibold">
+                  <span className="text-md font-medium group-hover:font-semibold">
                     {menu.name}
                   </span>
                 </button>
@@ -121,7 +125,7 @@ const SideNavBar = ({ sideNavWidth }: { sideNavWidth: number }) => {
                     />
                   </div>
                 )}
-                <span className="text-md font-medium group-hover:text-lg group-hover:font-semibold">
+                <span className="text-md font-medium group-hover:font-semibold">
                   {menu.name}
                 </span>
               </Link>
@@ -129,7 +133,6 @@ const SideNavBar = ({ sideNavWidth }: { sideNavWidth: number }) => {
           })}
         </div>
       </div>
-      <WriteModal isOpen={isOpen} onOpenChange={onOpenChange} />
     </div>
   );
 };

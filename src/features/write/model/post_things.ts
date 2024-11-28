@@ -2,7 +2,7 @@
 
 import db from "@/shared/config/database";
 import getSession from "@/shared/config/session";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function postThings(prevState: any, formData: FormData) {
   const things = formData.get("things");
@@ -23,7 +23,9 @@ export async function postThings(prevState: any, formData: FormData) {
   });
 
   if (post) {
-    revalidateTag("notes");
+    // revalidateTag("notes");
+    console.log("revalidatePath");
+    revalidatePath("/main");
     return { success: true };
   }
   return { success: false };

@@ -64,8 +64,8 @@ export default function Note({ note }: Props) {
       <div className="flex items-center justify-between mb-2">
         <h2 className="leading-snug font-semibold text-black/80 grow break-keep flex items-center gap-2 text-sm">
           {username ?? "이름 없는 친구"}
-          <div className="flex items-center gap-1 text-slate-400 text-sm select-none tracking-tight font-normal">
-            <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl font-medium">
+          <div className="flex items-center gap-1 text-slate-400/80 text-sm select-none tracking-tight font-normal">
+            <span className="material-symbols-rounded flex size-5 items-center justify-center text-base font-medium text-slate-500">
               edit
             </span>
             메모
@@ -108,36 +108,25 @@ export default function Note({ note }: Props) {
       </div>
 
       <div className="flex justify-between items-center mt-3">
-        <div className="flex items-center gap-4">
-          {/* <span className="material-symbols-outlined flex size-5 items-center justify-center text-xl scale-125 font-light">
-            bookmark
-          </span> */}
-          <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1">
+          <div className=" text-black/70 text-xs text-neutral-600 border border-neutral-200 rounded-full pl-3 pr-2 py-1.5 flex items-center gap-0.5 select-none cursor-pointer group">
             <span className="material-symbols-outlined material-fill flex size-5 items-center justify-center text-xl text-neutral-300">
               favorite
             </span>
-            {/* <RoundIcon name="favorite" /> */}
-            <span
-              className="font-semibold text-black/70 text-sm" //
-            >
-              12
-              {/* {likes} */}
-            </span>
+            <span className="font-semibold text-sm px-1">12</span>
           </div>
-          <div className="flex items-center gap-1">
-            {/* <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl text-black/70">
-              subdirectory_arrow_right
-            </span> */}
-            <span className=" text-black/70 text-sm text-neutral-500 border border-neutral-300 rounded-full px-3 py-0.5">
-              댓글
-              <span className="font-semibold ml-1">12</span>개
+          <div className=" text-black/70 text-xs text-neutral-600 border border-neutral-200 rounded-full pl-3 pr-2 py-1.5 flex items-center gap-0.5 select-none cursor-pointer group">
+            <span className="material-symbols-outlined flex size-5 items-center justify-center text-xl text-neutral-500 font-light">
+              comment
+              {/* subdirectory_arrow_right */}
             </span>
+            <span className="font-semibold text-sm px-1">12</span>
           </div>
-          {/* <div className="flex items-center gap-1">
-            <span className="material-symbols-rounded flex size-5 items-center justify-center text-xl text-black/70">
-              chat_bubble
+
+          {/* <div className="border border-neutral-100 bg-neutral-100 rounded-full px-2 py-1.5 flex items-center">
+            <span className="material-symbols-outlined material-fill flex size-5 items-center justify-center text-2xl scale-85 text-neutral-300">
+              bookmark
             </span>
-            <span className="font-semibold text-black/70 text-sm">12</span>
           </div> */}
         </div>
         <time className="text-neutral-400 text-sm flex items-center tracking-tight font-normal">
