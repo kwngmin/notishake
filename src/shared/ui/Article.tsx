@@ -60,7 +60,7 @@ export default function Note({ note }: Props) {
   };
 
   return (
-    <article className="border-b last:border-none border-neutral-200 py-6">
+    <article className="border-b last:border-none border-neutral-200 pt-6 pb-4">
       <div className="flex items-center justify-between mb-2">
         <h2 className="leading-snug font-semibold text-black/80 grow break-keep flex items-center gap-2 text-sm">
           {username ?? "이름 없는 친구"}
@@ -100,7 +100,10 @@ export default function Note({ note }: Props) {
         {sanitizedText(things)
           .split(/\r\n|\n/)
           .map((line: string, index: number) => (
-            <p key={index} className="leading-relaxed break-keep lg:pr-9">
+            <p
+              key={index}
+              className="leading-relaxed break-keep lg:pr-9 text-lg"
+            >
               {line}
               <br />
             </p>

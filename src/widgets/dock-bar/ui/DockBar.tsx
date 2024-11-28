@@ -42,7 +42,7 @@ const DockBar = ({
   const path = usePathname();
 
   return (
-    <div className="fixed lg:hidden bottom-0 sm:bottom-7 left-1/2 -translate-x-1/2 w-full sm:max-w-lg sm:px-4  sm:rounded-full overflow-hidden h-16 bg-white/30 backdrop-blur-md border-t border-neutral-200 sm:border-none sm:outline sm:outline-1 sm:outline-neutral-200 lg:outline-none grid grid-cols-5">
+    <div className="fixed lg:hidden bottom-0 sm:bottom-7 left-1/2 -translate-x-1/2 w-full sm:max-w-lg sm:px-4 sm:rounded-full overflow-hidden h-16 bg-white/30 backdrop-blur-xl border-t border-neutral-100 sm:border-none sm:outline sm:outline-1 sm:outline-neutral-100 lg:outline-none grid grid-cols-5">
       {menuList.map((menu) => {
         if (menu.title === "write") {
           return (
